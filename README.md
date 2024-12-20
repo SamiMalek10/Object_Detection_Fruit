@@ -1,37 +1,67 @@
-### Dataset
-Awl 7aja kat9lb 3la dataset mn Kaggle wla chi site : 7na l9inaha f wa7d site open source:
-https://storage.googleapis.com/openimages/web/visualizer/index.html
+# Object Detection avec YOLOv8
 
-kat5tar wa7d les classes libghiti lmodel dyalk it3lmn mnhom , st3mlna YOLOv8(predtrained model kidetecter lk les classes liktd5lhom lih) 7it hya la solution la plus rapide 3la rcnn faster rcnn...
+## Description du Projet
+Ce projet utilise le modèle préentraîné YOLOv8 pour la détection d'objets dans des images, des GIFs, et des vidéos. Les données d'entraînement proviennent du site [Open Images Dataset Visualizer](https://storage.googleapis.com/openimages/web/visualizer/index.html). L'objectif est d'entraîner un modèle performé pour détecter des classes choisies et générer des résultats précis avec des visualisations et des métriques.
 
-config.yaml : rédirige les chemins (dataset , données d'entrainement ,données de validation , les noms des classes)
 
-main.py : entrainement encore le modèle (ana 7bsst f train13 , st3mlt en globe 32 epochs l9it lmodele plus perfomrent o7bsst , chaque epoch dat liya 20 min)
+## Prérequis
 
-predict_chi 7aja.py : katpredicter les objets li fdik l7aja o katcreer des dossiers fihum les résultats
+Installez les bibliothèques nécessaires :
 
-assemble_resultats.py : fach salit mn les entrainement , jm3t ga3 les resultat.csv f resultat wa7d smito combined_results.csv(li mno an estimer en globs les metrics de test (apres 32 epochs) bach nvalider lmodele)
+```bash
+pip install ultralytics cv2 tqdm pycocotools
+```
 
-affichage_results.py : kat afficher les resultats f wa7d dossier smito output , o katzid f train13 dossier smito val fih ga3 les visualizations li kat3tihom Yolo par defaut(b7al Matrice de confusion) 
+---
 
---image-dir : argument (chemin d'images li baghi tester 3lihom )
---input-dir : argument (chemin des gifs li baghi tester 3lihom )
---output-dir : argument (chemin du dossier fin baghi t7t fihom resultats des tests)
-### commandes:
-1. pip install ultralytics cv2 tqdm pycocotools
+## Utilisation des Scripts
 
-2. python predict_images.py --image-dir /path/to/images --input-dir /path/to/folders_of_resluts
+### 1. Entraînement du Modèle
+Utilisez `main.py` pour entraîner le modèle YOLOv8. Configurez le fichier `config.yaml` pour spécifier les chemins des données d'entraînement, de validation, et les noms des classes.
 
-ex : python predict_images.py --image-dir "C:\Users\HP\Downloads\Object-Detection-Yolo\Object-Detection-Yolo\Test\test" 
---output-dir "C:\Users\HP\Downloads\Object-Detection-Yolo\Object-Detection-Yolo\Test\results of test" 
+### 2. Prédiction sur les Images
+Pour prédire les objets dans un dossier d'images :
 
-3. python predict_gifs.py --input-dir /path/to/images --input-dir /path/to/folders_of_resluts
-ex : python predict_gifs.py --input-dir "C:\Users\HP\Downloads\Test\test\gifs" --output-gif "C:\Users\HP\Downloads\Test\results of test\gifs"
+```bash
+python predict_images.py --image-dir /chemin/vers/images --output-dir /chemin/vers/dossier_résultats
+```
 
-4. python predict_video.py
 
-5. python assemble_results.py
+### 3. Prédiction sur les GIFs
+Pour prédire les objets dans un dossier de GIFs :
 
-5. python afficher_results.py
+```bash
+python predict_gifs.py --input-dir /chemin/vers/gifs --output-dir /chemin/vers/dossier_résultats
+```
 
+### 4. Prédiction sur les Vidéos
+Pour prédire les objets dans une vidéo :
+
+```bash
+python predict_videos.py
+```
+
+### 5. Assemblage des Résultats
+Pour assembler tous les résultats dans un fichier CSV unique :
+
+```bash
+python assemble_results.py
+```
+
+### 6. Affichage des Résultats
+Pour afficher les résultats dans un dossier spécifié :
+
+```bash
+python affichage_results.py
+```
+
+---
+
+## Remarques 
+
+- Les poids du modèle entraîné sont sauvegardés dans `runs/detect/train13/weights/`.
+- Les métriques et visualisations sont automatiquement générées dans le dossier `outputs/`.
+- Pour ajuster les époques ou les classes, modifiez le fichier `config.yaml`.
+
+N'hésitez pas à explorer les logs dans `runs/detect/train13/` pour déboguer ou analyser les performances du modèle.
 
